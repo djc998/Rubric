@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Books for {{ class.name }}{% endblock %}
+
+{% block content %}
+    <h1>Books for {{ class.name }}</h1>
+    <ul>
+        {% for book in books %}
+            <li><a href="{% url 'edit_book' book.id %}">{{ book.title }}</a></li>
+        {% empty %}
+            <li>No books have been added to this class.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

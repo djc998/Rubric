@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Welcome to Rubric Master</h1>
+  <p>Here are your classes:</p>
+  <ul>
+    {% for class in classes %}
+      <li><a href="{% url 'class_detail' class.id %}">{{ class.name }}</a></li>
+    {% empty %}
+      <li>No classes yet.</li>
+    {% endfor %}
+  </ul>
+  {% for class in classes %}
+    <p>{{ class.class_name }} - {{ class.instructor }}</p>
+    {% endfor %}
+{% endblock %}
