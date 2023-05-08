@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Welcome to Rubric For this assignmentr</h1>
+  <p>Select a student to grade:</p>
+{% endblock %}

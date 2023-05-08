@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Welcome to Class{{class.name}} Detail Page</h1>
+    <p>Instructor: {{class.instructor}}</p>
+  <p>Please select an assignement to grade</p>
+
+{% if assignments %}
+    <h2>Assignments:</h2>
+    <ul>
+    {% for ass in assignments %}
+    <li><a href="{% url 'assignment_rubric' class_id=class.id assignment_id=ass.id %}">{{ ass.title }}</a></li>
+        <p>{{ ass.description }}</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No assignments set up for this class</p>
+{% endif %}
+{% endblock %}

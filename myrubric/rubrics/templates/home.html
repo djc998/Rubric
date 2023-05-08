@@ -4,14 +4,17 @@
   <h1>Welcome to Rubric Master</h1>
   <p>Here are your classes:</p>
   <ul>
-    {% for class in classes %}
-      <li><a href="{% url 'class_detail' class.id %}">{{ class.name }}</a></li>
+    {% for cl in classes %}
+      <li><a href="{% url 'class_detail' cl.id %}">{{ cl.name }}</a></li>
     {% empty %}
       <li>No classes yet.</li>
     {% endfor %}
   </ul>
-  {% for class in classes %}
-    <p>{{ class.class_name }} - {{ class.instructor }}</p>
+  {% for cl in classes %}
+    <p>{{ cl.name }} - {{ cl.instructor }}</p>
     {% endfor %}
     <p>TEST - rubrics/templates/home.html</p>
+    {% for c in classes %}
+    <p>{{ c.name }}</p>
+    {% endfor %}
 {% endblock %}

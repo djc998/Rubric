@@ -18,3 +18,21 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Assignment(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    due_date = models.DateTimeField()
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+class Rubric(models.Model):
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='rubrics')
+    question = models.CharField(max_length=255)
+    points = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.question

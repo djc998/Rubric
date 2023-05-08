@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Class, Book
+from .models import Class, Book, Assignment, Rubric
 
 @login_required
 def class_list(request):
@@ -26,8 +26,9 @@ def book_edit(request, book_id):
 
 def home(request):
     # code to handle the request
-    classes = Class.objects.all()
-    return render(request, 'home.html', {classes: 'classes'})
+    classes = Class.objects.filter(user=request.user)
+    context = {'classes': classes}
+    return render(request, 'home.html', context)
 
 def classes(request):
     class_list = Class.objects.all()
@@ -50,3 +51,24 @@ def add_class(request):
     else:
         form = ClassForm()
     return render(request, 'add_class.html', {'form': form})
+
+#this is the class detail screen that would eventually show all the assignments for the class.
+def class_detail(request, pk):
+    class_obj = Class.objects.get(pk=pk)
+    assignments = class_obj.assignment_set.all()
+    context = {
+        'class': class_obj,
+        'assignments': assignments,
+    }
+    return render(request, 'class_detail.html', context)
+
+#This is the assignment rubric. It will eventually show the rubric for the assignment. To be graded
+
+def assignment_rubric(request, class_id, assignment_id):
+    rubrics = Rubric.objects.filter(assignment=assignment_id)
+    if len(rubrics) == 1:
+        rubric_id = rubrics[0].id
+        return redirect('rubric_detail', rubric_id=rubric_id)
+    else:
+        context = {'rubrics': rubrics}
+        return render(request, 'rubrics/rubric_list.html', context)
