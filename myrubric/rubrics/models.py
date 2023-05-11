@@ -1,6 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.apps import apps
+from django.contrib.auth.models import Permission
+
+#Going to add the following code to add a permission
+permission = Permission.objects.create(
+    codename='add_class',
+    name='Can add class',
+    content_type=content_type,
+)
 
 class Class(models.Model):
     name = models.CharField(max_length=100)
