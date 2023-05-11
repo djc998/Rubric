@@ -71,4 +71,4 @@ def assignment_rubric(request, class_id, assignment_id):
         return redirect('rubric_detail', rubric_id=rubric_id)
     else:
         context = {'rubrics': rubrics}
-        return render(request, 'rubrics/rubric_list.html', context)
+        return render(request, 'assignment_rubric.html', context)
